@@ -1,0 +1,7 @@
+.bank-icon{
+display: flex;
+float: right;
+align-self: flex-end;
+margin-right: 80px;
+height: 400px;
+}
