@@ -3,24 +3,29 @@ import SearchBar from './SearchBar';
 import './Table.css';
 
 function filterTransactions(transactions, search) {
-  return transactions.filter((transaction) =>
+ return transactions.filter((transaction) =>
     transaction.description.toLowerCase().includes(search.toLowerCase())
-  );
+ );
 }
 
-function TransactionTable({ transactions }) {
-  const [filteredTransactions, setFilteredTransactions] = useState([]);
-  const [search, setSearch] = useState('');
+function TransactionTable({ transactions, setTransactions }) {
+ const [filteredTransactions, setFilteredTransactions] = useState([]);
+ const [search, setSearch] = useState('');
 
-  useEffect(() => {
+ useEffect(() => {
     setFilteredTransactions(transactions);
-  }, [transactions]);
+ }, [transactions]);
 
-  useEffect(() => {
+ useEffect(() => {
     setFilteredTransactions(filterTransactions(transactions, search));
-  }, [search, transactions]);
+ }, [search, transactions]);
 
-  return (
+ const handleDelete = (id) => {
+    const updatedTransactions = transactions.filter((transaction) => transaction.id !== id);
+    setTransactions(updatedTransactions);
+ };
+
+ return (
     <div className='table-transaction'>
       <SearchBar search={search} setSearch={setSearch} />
       <table>
@@ -31,6 +36,7 @@ function TransactionTable({ transactions }) {
             <th>Description</th>
             <th>Category</th>
             <th>Amount</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -41,12 +47,15 @@ function TransactionTable({ transactions }) {
               <td>{transaction.description}</td>
               <td>{transaction.category}</td>
               <td>{transaction.amount}</td>
+              <td>
+                <button onClick={() => handleDelete(transaction.id)}>Delete</button>
+              </td>
             </tr>
           ))}
         </tbody>
       </table>
     </div>
-  );
+ );
 }
 
 export default TransactionTable;

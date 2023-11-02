@@ -9,7 +9,7 @@ function App() {
  const [search, setSearch] = useState('');
 
  useEffect(() => {
-    fetch('http://localhost:3000/transactions')
+    fetch(' http://localhost:3000/transactions')
       .then((response) => response.json())
       .then((data) => setFetchedData(data));
  }, []); // Empty dependency array ensures the effect runs once after the initial render

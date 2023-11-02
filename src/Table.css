@@ -54,5 +54,18 @@
       padding: 10px;
     
     }
+    
   }
-  
+  button {
+    background-color: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    font-size: 14px;
+    border-radius: 3px;
+   }
+   
+   button:hover {
+    background-color: darkred;
+   }
