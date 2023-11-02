@@ -11,13 +11,17 @@
   
   thead {
     background-color: #3498db;
-    color: white;
+    color: rgb(241, 230, 230);
+      height: 50px;
+      width: 100%;
+  
    
   }
   
   th, td {
     padding: 15px;
     text-align: left;
+   
   }
   
 

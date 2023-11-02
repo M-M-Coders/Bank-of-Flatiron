@@ -3,29 +3,26 @@ import SearchBar from './SearchBar';
 import './Table.css';
 
 function filterTransactions(transactions, search) {
- return transactions.filter((transaction) =>
+  return transactions.filter((transaction) =>
     transaction.description.toLowerCase().includes(search.toLowerCase())
- );
+  );
 }
 
-function TransactionTable({ transactions, setTransactions }) {
- const [filteredTransactions, setFilteredTransactions] = useState([]);
- const [search, setSearch] = useState('');
+function TransactionTable({ transactions, handleDelete, handleSort }) {
+  const [filteredTransactions, setFilteredTransactions] = useState([]);
+  const [search, setSearch] = useState('');
+  const [transaction, setFetchedData] = useState(transactions)
 
- useEffect(() => {
+  useEffect(() => {
     setFilteredTransactions(transactions);
- }, [transactions]);
+  }, [transactions]);
 
- useEffect(() => {
+  useEffect(() => {
     setFilteredTransactions(filterTransactions(transactions, search));
- }, [search, transactions]);
+  }, [search, transactions]);
 
- const handleDelete = (id) => {
-    const updatedTransactions = transactions.filter((transaction) => transaction.id !== id);
-    setTransactions(updatedTransactions);
- };
 
- return (
+  return (
     <div className='table-transaction'>
       <SearchBar search={search} setSearch={setSearch} />
       <table>
@@ -33,10 +30,11 @@ function TransactionTable({ transactions, setTransactions }) {
           <tr>
             <th>No.</th>
             <th>Date</th>
-            <th>Description</th>
+            <th>Description
+            <button onClick={() => handleSort("description")}>Sort</button>
+            </th>
             <th>Category</th>
             <th>Amount</th>
-            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -47,15 +45,13 @@ function TransactionTable({ transactions, setTransactions }) {
               <td>{transaction.description}</td>
               <td>{transaction.category}</td>
               <td>{transaction.amount}</td>
-              <td>
-                <button onClick={() => handleDelete(transaction.id)}>Delete</button>
-              </td>
+              <td><button onClick={() => handleDelete(transaction.id)}>Delete</button></td>
             </tr>
           ))}
         </tbody>
       </table>
     </div>
- );
+  );
 }
 
 export default TransactionTable;

@@ -59,6 +59,38 @@ function TransactionForm({ onAddTransaction }) {
           onChange={(e) => setAmount(e.target.value)}
         />
       </label>
+      <label>
+        Date:
+        <input type="date" value={new Date().toISOString()}/>
+      </label>
+      <label>
+        Time:
+        <input type="time" value={new Date().toISOString()}/>
+      </label>
+      <label>
+        <input type="radio" value="expense" checked={true} />
+        Expense
+      </label>
+      <label>
+        <input type="radio" value="income" />
+        Income
+      </label>
+      <label>
+        <input type="checkbox" value="recurring" />
+        Recurring
+      </label>
+      <label>
+        <input type="checkbox" value="recurring" />
+        Reconciled
+      </label>
+      <label>
+        <input type="checkbox" value="recurring" />
+        Void
+      </label>
+      <label>
+        <input type="checkbox" value="recurring" />
+        Memo
+      </label>
       <button type="submit">Add Transaction</button>
     </form>
   );
